@@ -1,4 +1,4 @@
 *.pem
 *.ppk
-\WhiteBoard_Prototype\node_modules
-\Chatroom_Prototype\node_modules
+WhiteBoard_Prototype/node_modules/
+Chatroom_Prototype/node_modules/
