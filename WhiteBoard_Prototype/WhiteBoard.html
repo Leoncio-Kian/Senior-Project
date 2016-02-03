@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<Body>
+		<canvas id="drawCanvas" width="800" height="600" style= "border:1px solid #c3c3c3;"></canvas>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+
+			var canvas = document.getElementById('drawCanvas');
+			var ctx = canvas.getContext('2d');
+			     
+			ctx.lineWidth = '3';
+			ctx.lineCap = 'round';
+			ctx.lineJoin = 'round';
+
+			var color = 'red';
+			var socket = io();
+
+			canvas.addEventListener('mousedown', startDraw, false);
+			canvas.addEventListener('mousemove', draw, false);
+			canvas.addEventListener('mouseup', endDraw, false);
+
+			function drawOnCanvas(color, plots) {
+			  ctx.strokeStyle = color;
+			  ctx.beginPath();
+			  ctx.moveTo(plots[0].x, plots[0].y);
+
+			  for(var i=1; i<plots.length; i++) {
+			    ctx.lineTo(plots[i].x, plots[i].y);
+			  }
+			  ctx.stroke();
+			}
+			
+			socket.on('whiteboard update', function(msg){
+				if(!msg || msg.plots.length < 1) return; 
+			        
+			  	drawOnCanvas(msg.color, msg.plots);
+			});
+			
+
+			var isActive = false;
+			var plots = [];
+			
+
+			function draw(e) {
+			  if(!isActive) return;
+
+			  var x = e.offsetX || e.layerX - canvas.offsetLeft;
+			  var y = e.offsetY || e.layerY - canvas.offsetTop;
+
+			  plots.push({x: x, y: y});
+
+			  drawOnCanvas(color, plots);
+			  socket.emit('whiteboard update', {'color': color, 'plots': plots});   
+				
+				
+			}
+			    
+			function startDraw(e) {
+			  isActive = true;
+			}
+			    
+			function endDraw(e) {
+				isActive = false;
+				/*
+				var socket = io();
+				socket.emit('whiteboard update', plots);
+
+
+				socket.on('whiteboard update', function(msg){
+					$('#messages').append($('<li>').text(msg));
+				});	
+				*/
+			  plots = [];
+			}
+			</script>
+
+
+
+
+		</script>
+	</Body>
+</html>

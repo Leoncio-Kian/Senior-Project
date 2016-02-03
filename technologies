@@ -1,0 +1,30 @@
+communication between users:
+websockets
+
+Why websockets:
+Main advantage of WebSockets for server, is that it is not HTTP request (after handshake), but proper message based communication protocol. That allows you to achieve huge performance and architecture advantages. For example in node.js you can share the same memory for different socket connections, so that way they can access shared variables. So you don't need to use database as exchange point in the middle (like with AJAX or Long Polling and for example PHP). You can store data in RAM, or even republish between sockets straight away.
+
+ALTERNATIVES:
+flash (not likely)
+long-polling
+
+user database
+mongodb (non relational)
+
+Why mongodb:
+Organizations of all sizes are adopting MongoDB because it enables them to build applications faster, handle highly diverse data types, and manage applications more efficiently at scale.
+
+Development is simplified as MongoDB documents map naturally to modern, object-oriented programming languages. Using MongoDB removes the complex object-relational mapping (ORM) layer that translates objects in code to relational tables.
+
+MongoDB’s flexible data model also means that your database schema can evolve with business requirements. For example, the ALTER TABLE command required to add a single, new field to Craiglist’s MySQL database would take months to execute. The Craigslist team migrated to MongoDB because it can accommodate changes to the data model without such costly schema migrations.
+
+MongoDB can also be scaled within and across multiple distributed data centers, providing new levels of availability and scalability previously unachievable with relational databases like MySQL. As your deployments grow in terms of data volume and throughput, MongoDB scales easily with no downtime, and without changing your application. In contrast, to achieve scale with MySQL often requires significant, custom engineering work.
+
+alternatives:
+mysql (relational)
+
+
+things the server has to deal with:
+receiving whiteboard updates
+storing the user database
+
