@@ -1,0 +1,63 @@
+Requirements for Virtual Classroom Web Application:
+
+login Page: 
+-box with three tabs, one for students and instructors. will contain the following:
+	-Two input fields for user and password.
+	-Button for logging in.		
+	-registration link
+
+-contain a description of what the web application is.
+	
+-(OPTIONAL) some way of showing the whiteboard in action
+
+
+
+Registration Page:
+-Two input fields, user and pass.
+-a register button 
+-a check box indicating if user will be instructor or not.
+
+
+
+
+Main Page:
+Accessed only after logging in as an instructor or student.
+-List of upcoming public classes with a description included.
+-Link to room creation
+-
+
+
+
+Room Creation Page:
+-Name Field
+-Description Field
+-(OPTIONAL) Background selection (for whiteboard)
+-Default settings checkboxes(allow students to write on board, etc.)
+-public/private checkbox (if private wont be shown in listings)
+-Date and Time of class start (could be immediate).
+
+
+
+Room Page:
+-WhiteBoard
+-chat (may be restricted/ unavailable)
+The following are by default restricted to only instuctor users:
+-set of colors
+-range of marker sizes.
+-eraser
+-clear whiteboard
+-audio for all student users.
+-(OPTIONAL) answer question button.
+
+
+
+server:
+-responsible for maintaining user database
+-responsible for realtime updates of whiteboard across all users in a room.
+
+
+CONSIDERATIONS:
+possible to group together class creation page with main page
+
+login page is currently considered to be the first page seen upon visiting site, but main page could be used instead to provide first time users with a better understanding of how the website works. the result would probably be too clunky, however.
+

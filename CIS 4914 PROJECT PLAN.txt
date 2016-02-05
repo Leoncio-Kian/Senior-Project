@@ -1,0 +1,27 @@
+CIS 4914 PROJECT PLAN
+
+PROJECT:	Virtual Classroom Web Application
+STUDENT:	Leoncio Kian
+UFID5-8:	9110
+DATE:		January 11, 2016
+
+STATEMENT OF WORK:
+Task 1.	Determine the requirements of the Virtual Classroom
+		
+		Plan out the design and features of the web application. Determine the layout of the web application, targeted audience, and frameworks to use that are best suited to its creation. Identify areas of difficulty and create a managable schedule that focuses on them. 
+
+Task 2.	Implement the Virtual Classroom web application.
+		
+		Create a webserver that will hold a user database as well as manage the realtime update of the whiteboard across all users currently viewing an instance of it. Also develop a client side interface allowing student users to possibly interact with the whiteboard and listen to a teacher user. The teacher user will have complete access to the whiteboard and can give permission to a student user to write on the whiteboard.
+
+Task 3. Test the application for any bugs or errors.
+
+		Have people test out the web application to ascertain that all features work correctly, and iron out bugs as they appear.
+
+DELIVERABLES:
+
+	1.	Source code written in CSS3, HTML5, and Javascript using	the Meteor.js framework with MongoDB as the database for	the users.
+
+	2.	Final Report, to be written in Microsoft Word.
+
+	3.	Logbook detailing progress on a day to day basis.

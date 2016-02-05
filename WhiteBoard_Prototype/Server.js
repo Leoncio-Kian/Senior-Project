@@ -2,27 +2,19 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var whiteboardArray = [];
-
 app.get('/', function(req, res){
-	res.sendFile(__dirname + '/WhiteBoard.html');
+	res.sendfile(__dirname + '/WhiteBoard.html');
 });
 
 io.on('connection', function(socket){
 	console.log('a user has connected');
-	console.log(socket.id);
-	io.emit('initializeWhiteboard', whiteboardArray);
-
 	socket.on('whiteboard update', function(msg){
-		socket.broadcast.emit('whiteboard update', msg);
-		whiteboardArray.push(msg);
+		console.log('message: ' + msg.plots[0].x + msg.plots[0].y);
+		io.emit('whiteboard update', msg);
 	});
 	socket.on('disconnect', function(){
 		console.log('user disconnected');
 	});
-	socket.on('updateArray', function(msg){
-		whiteboardArray[socket.id].push(msg);
-	})
 });
 
 http.listen(8080, function(){

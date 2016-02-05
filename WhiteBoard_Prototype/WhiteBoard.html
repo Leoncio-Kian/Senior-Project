@@ -12,83 +12,105 @@
 			ctx.lineCap = 'round';
 			ctx.lineJoin = 'round';3
 
-			var color = 'red';
+			var currentColor = 'blue';
 			var socket = io();
-			var previousPosition = {x: -1, y: -1};
-			var currentPosition = {x: -1, y: -1};
+
+			var temporaryStorage = [];
 
 			canvas.addEventListener('mousedown', startDraw, false);
 			canvas.addEventListener('mousemove', draw, false);
 			canvas.addEventListener('mouseup', endDraw, false);
+	
+			function setupDraw(color){
+				ctx.strokeStyle = color;
+				ctx.beginPath();		
+			}
 
-			function drawOnCanvas(color, plotLine) {
-			  ctx.strokeStyle = color;
-			  ctx.beginPath();
-			  ctx.moveTo(plotLine.startLoc.x, plotLine.startLoc.y);
+			function drawOnCanvas(plots) {
+			  ctx.moveTo(plots[0].x, plots[0].y);
 
-			  ctx.lineTo(plotLine.endLoc.x, plotLine.endLoc.y);
-
-			  /*
 			  for(var i=1; i<plots.length; i++) {
 			    ctx.lineTo(plots[i].x, plots[i].y);
 			  }
-			  */
+
 			  ctx.stroke();
 			}
+			function finishDraw(){
+				var holdLastPos = temporaryStorage[temporaryStorage.length - 1];
+				temporaryStorage = [];
+			  temporaryStorage.push(holdLastPos);
+			}
 			
-
 			socket.on('whiteboard update', function(msg){
-				if(!msg || msg.plots.length < 1) return; 
-			        
-			  	drawOnCanvas(msg.color, msg.plots);
+				if(!msg) return; 
+			    console.log(msg);
+			  	setupDraw(msg.color);
+			  	console.log(msg.plots);
+			    drawOnCanvas(msg.plots);
+			    finishDraw();
+			    setupDraw(msg.color);
 			});
-			
 
 			var isActive = false;
 			var plotArray = [];
-			
+			var start = 0;
+			var progress = 0;
 
 			function draw(e) {
 			  if(!isActive) return;
 
-			  var x = e.offsetX || e.layerX - canvas.offsetLeft;
-			  var y = e.offsetY || e.layerY - canvas.offsetTop;
-
-			  currentPosition = {x: x, y: y};
-
-			  plotLine = {startLoc: previousPosition, endLoc: currentPosition}
-
-			  drawOnCanvas(color, plotLine);
-			  socket.emit('whiteboard update', {'color': color, 'plots': plotLine});   
-				
-				plotArray.push(plotLine);
-
-				previousPosition = currentPosition;
-			}
+			  if (start == 0) start = Date.now();
+			  var progress = Date.now() - start;
+			  updateArray(e);
+			  if (progress > 50) {
+			  	
+			    drawOnCanvas(temporaryStorage);
+			    socket.emit('whiteboard update', {'color': currentColor, 'plots': temporaryStorage});
+			    finishDraw();
+			    setupDraw(currentColor);
+			    start = 0;
+			    progress = 0;
 			    
-			function startDraw(e) {
+			    ctx.beginPath();
+			  }
+				
+			}
+
+			function updateArray(e){
 				var x = e.offsetX || e.layerX - canvas.offsetLeft;
 			  var y = e.offsetY || e.layerY - canvas.offsetTop;
 
-			  previousPosition = {x: x, y: y};
+			  //socket.emit('whiteboard update', {'color': color, 'plots': plotLine, plotArray: plotArray});   
+				
+				temporaryStorage.push({x: x, y: y});
 
+			}
+			    
+			function startDraw(e) {
 			  isActive = true;
+				setupDraw(currentColor);
+				temporaryStorage = [];
 			}
 			    
 			function endDraw(e) {
 				isActive = false;
-				/*
-				var socket = io();
-				socket.emit('whiteboard update', plots);
-
-
-				socket.on('whiteboard update', function(msg){
-					$('#messages').append($('<li>').text(msg));
-				});	
-				*/
-			  plotArray = [];
-			  pos = 0;
+				setupDraw(currentColor);
+			    drawOnCanvas(temporaryStorage);
+			    finishDraw();
+				temporaryStorage = [];
 			}
+
+			socket.on('initializeWhiteboard', function(msg){
+				if(!msg) return; 
+					for(var i = 0; i < msg.length; i++){
+				    console.log(msg);
+				  	setupDraw(msg[i].color);
+				  	console.log(msg[i].plots);
+				    drawOnCanvas(msg[i].plots);
+				    finishDraw();
+				    setupDraw(msg[i].color);
+			  	}
+			});
 			</script>
 
 
