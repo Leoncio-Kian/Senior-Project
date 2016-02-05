@@ -10,26 +10,33 @@
 			     
 			ctx.lineWidth = '3';
 			ctx.lineCap = 'round';
-			ctx.lineJoin = 'round';
+			ctx.lineJoin = 'round';3
 
 			var color = 'red';
 			var socket = io();
+			var previousPosition = {x: -1, y: -1};
+			var currentPosition = {x: -1, y: -1};
 
 			canvas.addEventListener('mousedown', startDraw, false);
 			canvas.addEventListener('mousemove', draw, false);
 			canvas.addEventListener('mouseup', endDraw, false);
 
-			function drawOnCanvas(color, plots) {
+			function drawOnCanvas(color, plotLine) {
 			  ctx.strokeStyle = color;
 			  ctx.beginPath();
-			  ctx.moveTo(plots[0].x, plots[0].y);
+			  ctx.moveTo(plotLine.startLoc.x, plotLine.startLoc.y);
 
+			  ctx.lineTo(plotLine.endLoc.x, plotLine.endLoc.y);
+
+			  /*
 			  for(var i=1; i<plots.length; i++) {
 			    ctx.lineTo(plots[i].x, plots[i].y);
 			  }
+			  */
 			  ctx.stroke();
 			}
 			
+
 			socket.on('whiteboard update', function(msg){
 				if(!msg || msg.plots.length < 1) return; 
 			        
@@ -38,7 +45,7 @@
 			
 
 			var isActive = false;
-			var plots = [];
+			var plotArray = [];
 			
 
 			function draw(e) {
@@ -47,15 +54,24 @@
 			  var x = e.offsetX || e.layerX - canvas.offsetLeft;
 			  var y = e.offsetY || e.layerY - canvas.offsetTop;
 
-			  plots.push({x: x, y: y});
+			  currentPosition = {x: x, y: y};
 
-			  drawOnCanvas(color, plots);
-			  socket.emit('whiteboard update', {'color': color, 'plots': plots});   
+			  plotLine = {startLoc: previousPosition, endLoc: currentPosition}
+
+			  drawOnCanvas(color, plotLine);
+			  socket.emit('whiteboard update', {'color': color, 'plots': plotLine});   
 				
-				
+				plotArray.push(plotLine);
+
+				previousPosition = currentPosition;
 			}
 			    
 			function startDraw(e) {
+				var x = e.offsetX || e.layerX - canvas.offsetLeft;
+			  var y = e.offsetY || e.layerY - canvas.offsetTop;
+
+			  previousPosition = {x: x, y: y};
+
 			  isActive = true;
 			}
 			    
@@ -70,7 +86,8 @@
 					$('#messages').append($('<li>').text(msg));
 				});	
 				*/
-			  plots = [];
+			  plotArray = [];
+			  pos = 0;
 			}
 			</script>
 
