@@ -1,2 +1,76 @@
 <!DOCTYPE html>
 <html>
+	<Body>
+		<canvas id="whiteBoard" width = "800" height= "600" style= "boder:1px solid #c3c3c3;"></canvas>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+
+			//canvas variables
+			var board = document.getElementById('whiteBoard');
+			var ctx = canvas.getContext('2d');
+
+			//socket variable
+			var socket = io();
+
+			//attributes for the line
+			ctx.lineWidth = '3';
+			ctx.lineCap = 'round';
+			ctx.lineJoin = 'round';
+
+			/*
+			 * event listeners for mouse movements
+			 * each correspondes to a function.
+			*/
+			canvas.addEventListener('mousedown', startDraw, false);
+			canvas.addEventListener('mousemove', draw, false);
+			canvas.addEventListener('mouseup', endDraw, false);
+
+			//variable for the color
+			var currentColor = 'blue';
+
+			//array holding the line segments
+			var plotArray = [];
+
+			//variables for determining time and creating a framerate
+			var startTime = 0;
+			var framerate = 50;
+
+			//boolean for determining when the mouse has clicked and is moving.
+			var isActive = false;
+
+			function runWhiteBoard(){
+				if(startTime == 0) {
+					startTime = Date.now();
+					return;
+				}
+				if(isActive){
+
+				}
+				var timeElapsed = Date.now() - startTime;
+				if(timeElapsed > framerate){
+					drawOnCanvas(plotArray);
+				}
+			}
+
+			function drawOnCanvas(plots){
+				if(!plots) return;
+				//var to hold the length of the array to ensure that the length isnt changed while in the loop
+				//regarding the above, im not even sure that is an issue.
+				var arrayLength = plots.length;
+
+				ctx.strokeStyle = currentColor;
+				ctx.beginPath();
+
+				ctx.moveTo(plots[0])
+				for(var i = 0; i < arrayLength; i++){
+
+				}
+
+			}
+			
+
+
+		</script>
+	</Body>
+</html>
+
