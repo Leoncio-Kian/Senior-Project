@@ -10,7 +10,10 @@ ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
 fastclick@1.0.3
+<<<<<<< HEAD
 fds:streams@0.2.2
+=======
+>>>>>>> fd2f03cc09837f84d9bb05cf724e3f30637c8efb
 geojson-utils@1.0.3
 html-tools@1.0.4
 htmljs@1.0.4
@@ -35,7 +38,10 @@ minifiers@1.1.5
 minimongo@1.0.8
 mobile-status-bar@1.0.3
 mongo@1.1.0
+<<<<<<< HEAD
 mrt:moment@2.8.1
+=======
+>>>>>>> fd2f03cc09837f84d9bb05cf724e3f30637c8efb
 observe-sequence@1.0.6
 ordered-dict@1.0.3
 random@1.0.3

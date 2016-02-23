@@ -2,5 +2,8 @@ standard-app-packages
 iron:router
 twbs:bootstrap
 ddp
+<<<<<<< HEAD
 mrt:moment
 fds:streams
+=======
+>>>>>>> fd2f03cc09837f84d9bb05cf724e3f30637c8efb
