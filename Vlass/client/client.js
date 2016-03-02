@@ -1,14 +1,12 @@
-  Session.setDefault('counter', 0);
+Template.home.helpers({
+  myAppVariable: function() {
+    return Session.get('myAppVariable');
+  }
+});
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
+Template.home.events({
+  'click button': function(event, template) {
+    Session.set('myAppVariable', Math.floor(Math.random() * 11));
+    
+  }
+});
