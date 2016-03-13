@@ -1,0 +1,41 @@
+<template name="Vlass-Layout">
+  <head>
+    <title>Vlass</title>
+  </head>
+
+  <body>
+    <h1>Welcome to Vlass!</h1>
+
+    
+    <aside>
+    {{> yield "aside"}}
+    </aside>
+  </body>
+</template>
+<template name="links">
+  <nav>
+    <ul>
+      <li>
+        <a href="login">Login Page</a>
+      </li>
+      <li>
+        <a href="register">Register Page</a>
+      </li>
+    </ul>
+  </nav>
+</template>
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+  <ol>
+    {{#each users}}
+  {{> user}}
+  {{/each}}
+  </ol>
+</template>
+
+<template name="user">
+  <li class="user {{selected}}">
+    <span class="name">{{lastname}}</span>
+  </li>
+</template>
