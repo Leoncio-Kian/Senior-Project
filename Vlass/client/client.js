@@ -1,4 +1,5 @@
 
+
 users = new MysqlSubscription('allUsers');
 
 Session.setDefault('counter', 0);
@@ -25,3 +26,4 @@ Template.user.helpers({
     return Session.equals("selectedUser", this.id) ? "selected" : '';
   }
 });
+
