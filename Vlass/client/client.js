@@ -1,6 +1,8 @@
 
+Meteor.startup(function () {
+  classrooms = new MysqlSubscription('allClasses');
+})
 
-users = new MysqlSubscription('allUsers');
 
 Session.setDefault('counter', 0);
 

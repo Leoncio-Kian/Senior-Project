@@ -39,7 +39,7 @@ Template.whiteboard.onRendered(function () {
     drawOnCanvas(msg.data);
     
   });
-  Streamy.on('whiteboard update client', function(msg){
+  Streamy.on('whiteboard update', function(msg){
     if(!msg) return; 
       plotArray.push(msg);
       //setupDraw(currentColor);
@@ -64,10 +64,10 @@ Template.whiteboard.onRendered(function () {
       plotArray.push({'color': currentColor, 'plots': temporaryStorage});
 
       drawOnCanvas(plotArray);
-      Streamy.emit('whiteboard update server', {'color': currentColor, 'plots': temporaryStorage});;
+      Streamy.broadcast('whiteboard update', {'color': currentColor, 'plots': temporaryStorage});;
       //console.log("makes it here!");
       plotArray = [];
-      //temporaryStorage = [];
+      temporaryStorage = [];
       start = 0;
       progress = 0;
     }

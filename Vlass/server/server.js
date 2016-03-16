@@ -1,26 +1,26 @@
 
 var whiteboardArray = [];
 
-Streamy.onConnect(function (socket) {
-  console.log('some socket connected to server!');
+//Streamy.onConnect(function (socket) {
+ // console.log('some socket connected to server!');
 
+//});
+
+io.on('connection', function(socket){
+  io.on('whiteboard update', function(msg, socket) {
+    //console.log('server whiteboard updated!');
+    //Streamy.broadcast('whiteboard update client',msg, socket);
+    whiteboardArray.push(msg);
+
+  });
+  io.on('get Whiteboard', function(data, socket) {
+    //console.log(data);
+    //console.log(socket);
+    if(whiteboardArray != null)
+    io.emit('initializeWhiteboard',{data: whiteboardArray}, socket);
+  });
 });
-
-
-Streamy.on('whiteboard update server', function(msg, socket) {
-  //console.log('server whiteboard updated!');
-  Streamy.broadcast('whiteboard update client',msg, socket);
-  whiteboardArray.push(msg);
-
-});
-Streamy.on('get Whiteboard', function(data, socket) {
-  //console.log(data);
-  //console.log(socket);
-  if(whiteboardArray != null)
-  Streamy.emit('initializeWhiteboard',{data: whiteboardArray}, socket);
-});
-
-  users = new MysqlSubscription('allUsers');
+  classes = new MysqlSubscription('allClasses');
 
   Meteor.startup(function () {
     // code to run on server at startup
@@ -43,10 +43,10 @@ Streamy.on('get Whiteboard', function(data, socket) {
   process.on('SIGTERM', closeAndExit);
   process.on('SIGINT', closeAndExit);
   
-  Meteor.publish('allUsers', function() {
+  Meteor.publish('allClasses', function() {
     return liveDb.select(
-      'SELECT * FROM users',
-      [ { table: 'users' } ]
+      'SELECT * FROM classroom',
+      [ { table: 'classroom' } ]
     );
   });
 

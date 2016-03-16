@@ -1,0 +1,15 @@
+<template name="classrooms">
+  <h1>Classrooms</h1>
+  <ul>
+    {{#each classrooms}}
+      {{> classroom}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="classroom">
+<li class="classroom {{selected}}">
+  <a href="{{classid}}"><span class="classname">{{classname}}</span>
+  <span class="classowner">{{owner}}</span></a>
+</li>
+</template>
