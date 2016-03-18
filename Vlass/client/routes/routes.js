@@ -2,6 +2,16 @@ Router.configure({
   layoutTemplate: 'Vlass-Layout'
 });
 
+vlassroomController = RouteController.extend({
+  template: 'vlassroom',
+  data: function () {
+    return {_id: this.params._id};
+  },
+  action: function () {
+    this.render('vlassroom', {to: 'aside'});
+  }
+});
+
 Router.onBeforeAction(function () {
   console.log('this went first!');
   if(!Meteor.userId()){
@@ -29,7 +39,8 @@ Router.route('/classrooms', function () {
   this.render('classrooms', {to: 'aside'});
 });
 
-Router.route('/classrooms/:_id', function () {
-  var classid = this.params._id;
-  this.render('classroom', {to: 'aside'});
+Router.route('/classrooms/:_id', {
+  name: 'vlassroom',
+  controller: 'vlassroomController'
+  
 });

@@ -6,18 +6,18 @@ var whiteboardArray = [];
 
 //});
 
-io.on('connection', function(socket){
-  io.on('whiteboard update', function(msg, socket) {
+Streamy.on('connection', function(socket){
+  Streamy.on('whiteboard update', function(msg, socket) {
     //console.log('server whiteboard updated!');
     //Streamy.broadcast('whiteboard update client',msg, socket);
     whiteboardArray.push(msg);
 
   });
-  io.on('get Whiteboard', function(data, socket) {
+  Streamy.on('get Whiteboard', function(data, socket) {
     //console.log(data);
     //console.log(socket);
     if(whiteboardArray != null)
-    io.emit('initializeWhiteboard',{data: whiteboardArray}, socket);
+    Streamy.emit('initializeWhiteboard',{data: whiteboardArray}, socket);
   });
 });
   classes = new MysqlSubscription('allClasses');

@@ -25,3 +25,5 @@ accounts-ui
 accounts-password
 
 joncursi:socket-io-client
+yuukan:streamy
+yuukan:streamy-rooms
