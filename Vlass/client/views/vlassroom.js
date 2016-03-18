@@ -1,6 +1,9 @@
-Template.vlassroom.onRendered(function () {
-  Streamy.join(this.data._id);
 
+
+Template.vlassroom.onRendered(function () {
+  var classid = this.data._id;
+  Streamy.join(classid);
+  console.log(classid);
   var canvas = document.getElementById('drawCanvas');
   var ctx = canvas.getContext('2d');
        
@@ -32,14 +35,14 @@ Template.vlassroom.onRendered(function () {
 
 
   }
-    Streamy.on('initializeWhiteboard', function(msg){
+    Streamy.on('initialize_Whiteboard', function(msg){
     
     if(!msg) return; 
     //console.log('this is it\n' + msg);
     drawOnCanvas(msg.data);
     
   });
-  Streamy.on('whiteboard update', function(msg){
+  Streamy.on('whiteboard_update', function(msg){
     if(!msg) return; 
       plotArray.push(msg);
       //setupDraw(currentColor);
@@ -64,7 +67,7 @@ Template.vlassroom.onRendered(function () {
       plotArray.push({'color': currentColor, 'plots': temporaryStorage});
 
       drawOnCanvas(plotArray);
-      Streamy.rooms(this.data._id).emit('whiteboard update', {'color': currentColor, 'plots': temporaryStorage});;
+      Streamy.rooms(classid).emit('whiteboard_update', {'color': currentColor, 'plots': temporaryStorage});;
       //console.log("makes it here!");
       plotArray = [];
       temporaryStorage = [];
@@ -98,11 +101,11 @@ Template.vlassroom.onRendered(function () {
 
 
   $(document).ready(function () {
-    Streamy.emit('get Whiteboard');
+    Streamy.emit('get_Whiteboard');
   });
 });
 Template.vlassroom.helpers({
-  something: function () {
+  startDraw: function () {
     console.log(this.data);
   }
 })
