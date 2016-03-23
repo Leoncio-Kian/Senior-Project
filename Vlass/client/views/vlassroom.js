@@ -1,40 +1,62 @@
+function Whiteboard(classid, canvas, ctx) {
+  this.classid = classid;
+  this.canvas = canvas;
+  this.ctx = ctx;
+}
+var Whiteboards = [];
 
+var classid;                //the classid from the mysql database
+var canvas;                 //the canvas on the template
+var ctx;                    //the means of drawing on the canvas
+var currentColor;           //the current color
+var temporaryStorage;       //the temp storage of coordinates. deleted on draw
+
+var isActive = false;       //whether the mouse can draw on canvas or not
+var plotArray = [];         //the full set of coordinates 
+var start = 0;              //the starting point of the ctx drawling
+var progress = 0;           //the variable that keeps track of the framerate.
 
 Template.vlassroom.onRendered(function () {
-  var classid = this.data._id;
+  Whiteboards.push(new Whiteboard(this.data._id, document.getElementById('drawCanvas'),))
+  classid = this.data._id;
   Streamy.join(classid);
+
   console.log(classid);
-  var canvas = document.getElementById('drawCanvas');
-  var ctx = canvas.getContext('2d');
+  canvas = document.getElementById('drawCanvas');
+  ctx = canvas.getContext('2d');
        
   ctx.lineWidth = '3';
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';3
 
-  var currentColor = 'blue';
+  currentColor = 'blue';
 
-  var temporaryStorage = [];
+  temporaryStorage = [];
 
   canvas.addEventListener('mousedown', startDraw, false);
   canvas.addEventListener('mousemove', draw, false);
   canvas.addEventListener('mouseup', endDraw, false);
+});
+  
 
-  function drawOnCanvas(pArray) {
 
-    for(var j = 0; j < pArray.length; j++){
-      ctx.strokeStyle = pArray[j].color;
-      ctx.beginPath();
-        ctx.moveTo(pArray[j].plots[0].x, pArray[j].plots[0].y);
 
-      for(var i=0; i<pArray[j].plots.length; i++) {
-          ctx.lineTo(pArray[j].plots[i].x, pArray[j].plots[i].y);
-      }
-      ctx.stroke();
+function drawOnCanvas(pArray, ctx) {
+
+  for(var j = 0; j < pArray.length; j++){
+    ctx.strokeStyle = pArray[j].color;
+    ctx.beginPath();
+      ctx.moveTo(pArray[j].plots[0].x, pArray[j].plots[0].y);
+
+    for(var i=0; i<pArray[j].plots.length; i++) {
+        ctx.lineTo(pArray[j].plots[i].x, pArray[j].plots[i].y);
     }
-
-
-
+    ctx.stroke();
   }
+
+
+
+}
     Streamy.on('initialize_Whiteboard', function(msg){
     
     if(!msg) return; 
@@ -52,10 +74,6 @@ Template.vlassroom.onRendered(function () {
       //setupDraw(currentColor);
   });
 
-  var isActive = false;
-  var plotArray = [];
-  var start = 0;
-  var progress = 0;
 
   function draw(e) {
     if(!isActive) return;
@@ -103,7 +121,6 @@ Template.vlassroom.onRendered(function () {
   $(document).ready(function () {
     Streamy.emit('get_Whiteboard');
   });
-});
 Template.vlassroom.helpers({
   startDraw: function () {
     console.log(this.data);

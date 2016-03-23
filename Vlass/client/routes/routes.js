@@ -8,6 +8,7 @@ vlassroomController = RouteController.extend({
     return {_id: this.params._id};
   },
   action: function () {
+    console.log('im about to render vlassroom!');
     this.render('vlassroom', {to: 'aside'});
   }
 });
