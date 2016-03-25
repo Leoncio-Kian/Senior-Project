@@ -1,13 +1,33 @@
-function Whiteboard(classid, canvas, ctx) {
-  this.classid = classid;
-  this.canvas = canvas;
-  this.ctx = ctx;
+function Whiteboard(outerclassid, outercanvas) {
+
+  var classid = outerclassid;
+  var ctx = canvas.getContext('2d');
+  var canvas = outercanvas;
+
+  return {
+    'getCanvas': function() {
+      return canvas;
+    },
+    'getCtx': function () {
+      return ctx;
+    },
+    'getClassid': function () {
+      return classid;
+    },
+    'updateCanvas': function(newCanvas) {
+      canvas = newCanvas;
+      ctx = newCanvas.getContext('2d');
+    }
+
+
+  }
 }
-var Whiteboards = [];
+
+var cWhiteboard;
 
 var classid;                //the classid from the mysql database
-var canvas;                 //the canvas on the template
-var ctx;                    //the means of drawing on the canvas
+//var canvas;                 //the canvas on the template
+//var ctx;                    //the means of drawing on the canvas
 var currentColor;           //the current color
 var temporaryStorage;       //the temp storage of coordinates. deleted on draw
 
@@ -17,41 +37,46 @@ var start = 0;              //the starting point of the ctx drawling
 var progress = 0;           //the variable that keeps track of the framerate.
 
 Template.vlassroom.onRendered(function () {
-  Whiteboards.push(new Whiteboard(this.data._id, document.getElementById('drawCanvas'),))
   classid = this.data._id;
-  Streamy.join(classid);
+  var temp = Meteor.call('get_whiteboard', classid);
+  if(temp == null)
+    cWhiteboard = new Whiteboard(this.data._id, this.find("#drawCanvas"));
+  else{
+    
+  }
+  Streamy.join(cWhiteboard.getClassid());
 
-  console.log(classid);
-  canvas = document.getElementById('drawCanvas');
-  ctx = canvas.getContext('2d');
-       
-  ctx.lineWidth = '3';
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';3
+  console.log(cWhiteboard.getClassid());
+  //cWhiteboard.anvas = document.getElementById('drawCanvas');
+  //ctx = canvas.getContext('2d')
+
+  cWhiteboard.getCtx().lineWidth = '3';
+  cWhiteboard.getCtx().lineCap = 'round';
+  cWhiteboard.getCtx().lineJoin = 'round';
 
   currentColor = 'blue';
 
   temporaryStorage = [];
 
-  canvas.addEventListener('mousedown', startDraw, false);
-  canvas.addEventListener('mousemove', draw, false);
-  canvas.addEventListener('mouseup', endDraw, false);
+  cWhiteboard.getCanvas().addEventListener('mousedown', startDraw, false);
+  cWhiteboard.getCanvas().addEventListener('mousemove', draw, false);
+  cWhiteboard.getCanvas().addEventListener('mouseup', endDraw, false);
 });
   
 
 
 
-function drawOnCanvas(pArray, ctx) {
+function drawOnCanvas(pArray) {
 
   for(var j = 0; j < pArray.length; j++){
-    ctx.strokeStyle = pArray[j].color;
-    ctx.beginPath();
-      ctx.moveTo(pArray[j].plots[0].x, pArray[j].plots[0].y);
+    cWhiteboard.getCtx().strokeStyle = pArray[j].color;
+    cWhiteboard.getCtx().beginPath();
+      cWhiteboard.getCtx().moveTo(pArray[j].plots[0].x, pArray[j].plots[0].y);
 
     for(var i=0; i<pArray[j].plots.length; i++) {
-        ctx.lineTo(pArray[j].plots[i].x, pArray[j].plots[i].y);
+        cWhiteboard.getCtx().lineTo(pArray[j].plots[i].x, pArray[j].plots[i].y);
     }
-    ctx.stroke();
+    cWhiteboard.getCtx().stroke();
   }
 
 
@@ -79,13 +104,14 @@ function drawOnCanvas(pArray, ctx) {
     if(!isActive) return;
 
     if (start == 0) start = Date.now();
-    var progress = Date.now() - start;
+    progress = Date.now() - start;
     updateArray(e);
     if (progress > 50) {
       plotArray.push({'color': currentColor, 'plots': temporaryStorage});
 
       drawOnCanvas(plotArray);
-      Streamy.rooms(classid).emit('whiteboard_update', {'color': currentColor, 'plots': temporaryStorage});;
+      Streamy.rooms(cWhiteboard.getClassid()).emit('whiteboard_update', {'color': currentColor, 'plots': temporaryStorage});
+      Meteor.call('set_whiteboard',cWhiteboard.getCanvas());
       //console.log("makes it here!");
       plotArray = [];
       temporaryStorage = [];
@@ -96,8 +122,8 @@ function drawOnCanvas(pArray, ctx) {
   }
 
   function updateArray(e){
-    var x = e.offsetX || e.layerX - canvas.offsetLeft;
-    var y = e.offsetY || e.layerY - canvas.offsetTop;
+    var x = e.offsetX || e.layerX - cWhiteboard.getCanvas().offsetLeft;
+    var y = e.offsetY || e.layerY - cWhiteboard.getCanvas().offsetTop;
 
     //socket.emit('whiteboard update', {'color': color, 'plots': plotLine, plotArray: plotArray});   
     
@@ -114,15 +140,10 @@ function drawOnCanvas(pArray, ctx) {
     plotArray.push({'color': currentColor, 'plots': temporaryStorage});
       drawOnCanvas(plotArray);
       temporaryStorage = [];
-      plotsArray = [];
+      plotArray = [];
   }
 
 
   $(document).ready(function () {
     Streamy.emit('get_Whiteboard');
   });
-Template.vlassroom.helpers({
-  startDraw: function () {
-    console.log(this.data);
-  }
-})
