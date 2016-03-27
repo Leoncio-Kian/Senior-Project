@@ -4,14 +4,25 @@
   </head>
 
   <body>
-    <h1>Welcome to Vlass!</h1>
-
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Vlass</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href={{pathFor route='login'}}>Login</a></li>
+                <li><a href={{pathFor route='register'}}>Register</a></li>
+                <li><a href={{pathFor route='classrooms'}}>Classrooms</a></li>
+            </ul>
+        </div>
+    </nav>
     
     <aside>
     {{> yield "aside"}}
     </aside>
   </body>
 </template>
+
 <template name="links">
   <nav>
     <ul>
@@ -29,6 +40,7 @@
     </ul>
   </nav>
 </template>
+
 <template name="hello">
   <button>Click Me</button>
   <p>You've pressed the button {{counter}} times.</p>
@@ -37,10 +49,4 @@
   {{> user}}
   {{/each}}
   </ol>
-</template>
-
-<template name="user">
-  <li class="user {{selected}}">
-    <span class="name">{{lastname}}</span>
-  </li>
 </template>

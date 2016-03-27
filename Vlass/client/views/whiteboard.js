@@ -1,3 +1,4 @@
+/*
 Template.whiteboard.onRendered(function () {
   
 
@@ -101,3 +102,4 @@ Template.whiteboard.onRendered(function () {
     Streamy.emit('get Whiteboard');
   });
 });
+*/

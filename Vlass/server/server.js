@@ -1,3 +1,11 @@
+//Override Meteor._debug to filter for custom msgs
+Meteor._debug = (function (super_meteor_debug) {
+  return function (error, info) {
+    if (!(info && _.has(info, 'msg')))
+      super_meteor_debug(error, info);
+  }
+})(Meteor._debug);
+
 
 var whiteboardArray = [];
 
@@ -51,34 +59,40 @@ Streamy.onConnect(function (socket) {
   });
 
 Meteor.methods({
-  'get_whiteboard' : function (classid) {
-    if (!classid) {
-      console.log('the classid doesn\'t exist!');
-      return null;
-    }
-    else if (!whiteboardArray[classid]) {
+  'get_whiteboard': function (classid) {
+      if (!classid) {
+        console.log('the classid doesn\'t exist!');
+        return null;
+      }
+      else if (!whiteboardArray[classid]) {
 
-      console.log('the whiteboard did not exist yet!');
-      return null;
-    }
-    else {
-      return whiteboardArray[classid];
-    }
-
+        console.log('the whiteboard did not exist yet!');
+        return null;
+      }
+      else {
+        return whiteboardArray[classid];
+      }
 
 
 
   },
   'set_whiteboard': function (classid, canvas) {
+
+    console.log(classid);
     if(!classid){
       console.log('the classid doesn\'t exist!');
     }
-    else if(!canvas){
+    else if(!canvas) {
+      console.log(canvas);
       console.log('the canvas doesn\'t exist!');
 
+    } else if(!whiteboardArray[classid]){
+      console.log('creating first entry in whiteboard array');
+      whiteboardArray[classid] =  [canvas];
     }
     else {
-      whiteboardArray[classid] = canvas;
+      whiteboardArray[classid].push(canvas);
+      //console.log(whiteboardArray[classid]);
     }
   }
 });
