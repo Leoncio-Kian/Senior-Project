@@ -47,3 +47,7 @@ Router.route('/classrooms/:_id', {
   controller: 'vlassroomController'
   
 });
+
+Router.route('/dashboard', function () {
+  this.render('dashboard', {to: 'aside'});
+})

@@ -22,10 +22,11 @@ Template.hello.events({
     Session.set('counter', Session.get('counter') + 1);
   }
 });
-
+/*
 Template.user.helpers({
   selected: function () {
     return Session.equals("selectedUser", this.id) ? "selected" : '';
   }
 });
 
+*/

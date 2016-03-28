@@ -39,7 +39,7 @@ Streamy.onConnect(function (socket) {
     host: 'localhost',
     port: '3306',
     user: 'root',
-    password: '6882907',
+    password: '',
     database: 'VlassDB'
   });
 

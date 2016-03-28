@@ -7,13 +7,19 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Vlass</a>
+                <a href={{pathFor route='landing'}} class="navbar-brand" >Vlass</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href={{pathFor route='login'}}>Login</a></li>
-                <li><a href={{pathFor route='register'}}>Register</a></li>
-                <li><a href={{pathFor route='classrooms'}}>Classrooms</a></li>
+              <li class="active"><a href={{pathFor route='login'}}>Login</a></li>
+              <li><a href={{pathFor route='classrooms'}}>Classrooms</a></li>
+              {{#if currentUser }}
+              <li><a href={{pathFor route='dashboard'}}>Dashboard</a></li>
+              {{else}}
+              
+              <li><a href={{pathFor route='register'}}>Register</a></li>
+              {{/if}}
             </ul>
+
         </div>
     </nav>
     
@@ -41,12 +47,4 @@
   </nav>
 </template>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-  <ol>
-    {{#each users}}
-  {{> user}}
-  {{/each}}
-  </ol>
-</template>
+
