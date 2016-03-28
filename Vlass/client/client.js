@@ -6,7 +6,7 @@ Meteor.startup(function () {
 
 Session.setDefault('counter', 0);
 
-
+/*
 Template.hello.helpers({
   counter: function () {
     return Session.get('counter');
@@ -22,7 +22,7 @@ Template.hello.events({
     Session.set('counter', Session.get('counter') + 1);
   }
 });
-/*
+
 Template.user.helpers({
   selected: function () {
     return Session.equals("selectedUser", this.id) ? "selected" : '';

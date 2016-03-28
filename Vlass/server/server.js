@@ -94,6 +94,13 @@ Meteor.methods({
       whiteboardArray[classid].push(canvas);
       //console.log(whiteboardArray[classid]);
     }
+  },
+  'add_classroom': function (userId, classname, classsize, public) {
+    check(classsize, Number);
+    check(public, Boolean);
+
+    console.log(userId, classname, classsize, public);
+    liveDb.db.query('INSERT INTO classroom (classname, owner, currentsize, maxsize, public) VALUES (?, ?, ?, ?)' [userId, classname, classsize, public]);
   }
 });
 

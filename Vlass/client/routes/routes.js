@@ -25,7 +25,7 @@ Router.onBeforeAction(function () {
 }, {only: ['whiteboard']})
 
 Router.route('/', function (){
-  this.render('landing', {to: 'aside'});
+  this.render('landing', {name: 'home', to: 'aside'});
 });
 Router.route('/login', function () {
   this.render('login', {to: 'aside'});
