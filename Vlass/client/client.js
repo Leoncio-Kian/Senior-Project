@@ -1,7 +1,7 @@
 
 Meteor.startup(function () {
   classrooms = new MysqlSubscription('allClasses');
-})
+});
 
 
 Session.setDefault('counter', 0);

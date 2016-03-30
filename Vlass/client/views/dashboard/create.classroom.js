@@ -5,19 +5,19 @@ Template.createClassroom.helpers({
 });
 
 Template.createClassroom.events({
-  "submit .submit-Vlassroom": function (event) {
+  "submit .newVlassroom": function (event) {
     //prevent default brower form submit
     event.preventDefault();
 
     //get value from form element
-    var classname = event.target.Vlassroom-Name.value;
-    var size = event.target.Vlassroom-Size.value;
-    var time = event.target.Vlassroom-Time.value;
-    var duration = event.target.Vlassroom-Duration.value;
-    var description = even.target.Vlassroom-Description.value;
-    var public = false;
-    
-    Meteor.call('add_classroom', Meteor.userId(), classname, size, public, function (error, response) {
+    var classname = event.target.VlassroomName.value;
+    var size = event.target.VlassroomSize.value;
+    var time = event.target.VlassroomTime.value;
+    var duration = event.target.VlassroomDuration.value;
+    var description = event.target.VlassroomDescription.value;
+    var available = false;
+    console.log( 'made it here!' );
+    Meteor.call('add_classroom', Meteor.userId(), classname, available, duration, time, size, description, function (error, response) {
       if (error) 
         console.log('there was an error!');
       else {

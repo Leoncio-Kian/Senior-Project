@@ -1,5 +1,5 @@
 Template.classrooms.rendered = function () {
-  //classrooms = new MysqlSubscription('allclasses');
+  // classrooms = new MysqlSubscription('allclasses');
 };
 
 Template.classrooms.helpers({

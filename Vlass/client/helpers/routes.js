@@ -1,3 +1,5 @@
+
+
 Router.configure({
   layoutTemplate: 'Vlass-Layout'
 });
@@ -5,33 +7,33 @@ Router.configure({
 vlassroomController = RouteController.extend({
   template: 'vlassroom',
   data: function () {
-    return {_id: this.params._id};
+    return { _id: this.params._id };
   },
   action: function () {
     console.log('im about to render vlassroom!');
-    this.render('vlassroom', {to: 'aside'});
+    this.render('vlassroom', { to: 'aside' });
   }
 });
 
 Router.onBeforeAction(function () {
   console.log('this went first!');
-  if(!Meteor.userId()){
-    console.log("not logged in!");
+  if (!Meteor.userId()) {
+    console.log('not logged in!');
   }
-  else{
+  else {
     console.log(Meteor.userId());
     this.next();
   }
-}, {only: ['whiteboard']})
+}, { only: ['whiteboard'] });
 
-Router.route('/', function (){
-  this.render('landing', {name: 'home', to: 'aside'});
+Router.route('/', function () {
+  this.render('landing', { name: 'home', to: 'aside' });
 });
 Router.route('/login', function () {
-  this.render('login', {to: 'aside'});
+  this.render('login', { to: 'aside' });
 });
 Router.route('/register', function () {
-  this.render('register', {to: 'aside'});
+  this.render('register', { to: 'aside' });
 });
 /*
 Router.route('/whiteboard', function () {
@@ -39,15 +41,15 @@ Router.route('/whiteboard', function () {
 });
 */
 Router.route('/classrooms', function () {
-  this.render('classrooms', {to: 'aside'});
+  this.render('classrooms', { to: 'aside' });
 });
 
 Router.route('/classrooms/:_id', {
   name: 'vlassroom',
   controller: 'vlassroomController'
-  
+
 });
 
 Router.route('/dashboard', function () {
-  this.render('dashboard', {to: 'aside'});
+  this.render('dashboard', { to: 'aside' });
 })

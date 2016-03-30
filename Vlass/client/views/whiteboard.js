@@ -1,10 +1,10 @@
 /*
 Template.whiteboard.onRendered(function () {
-  
+
 
   var canvas = document.getElementById('drawCanvas');
   var ctx = canvas.getContext('2d');
-       
+
   ctx.lineWidth = '3';
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';3
@@ -34,14 +34,14 @@ Template.whiteboard.onRendered(function () {
 
   }
     Streamy.on('initializeWhiteboard', function(msg){
-    
-    if(!msg) return; 
+
+    if(!msg) return;
     //console.log('this is it\n' + msg);
     drawOnCanvas(msg.data);
-    
+
   });
   Streamy.on('whiteboard update', function(msg){
-    if(!msg) return; 
+    if(!msg) return;
       plotArray.push(msg);
       //setupDraw(currentColor);
       drawOnCanvas(plotArray);
@@ -72,23 +72,23 @@ Template.whiteboard.onRendered(function () {
       start = 0;
       progress = 0;
     }
-    
+
   }
 
   function updateArray(e){
     var x = e.offsetX || e.layerX - canvas.offsetLeft;
     var y = e.offsetY || e.layerY - canvas.offsetTop;
 
-    //socket.emit('whiteboard update', {'color': color, 'plots': plotLine, plotArray: plotArray});   
-    
+    //socket.emit('whiteboard update', {'color': color, 'plots': plotLine, plotArray: plotArray});
+
     temporaryStorage.push({x: x, y: y});
 
   }
-      
+
   function startDraw(e) {
     isActive = true;
   }
-      
+
   function endDraw(e) {
     isActive = false;
     plotArray.push({'color': currentColor, 'plots': temporaryStorage});
