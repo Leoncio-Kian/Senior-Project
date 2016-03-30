@@ -1,0 +1,25 @@
+<template name="classrooms">
+  <h1>Classrooms</h1>
+  <div>
+  <table class="table table-striped">
+    <thead>
+      <th>Class Name</th>
+      <th>Owner</th>
+    </thead>
+    <tbody>
+      {{#each classrooms}}
+        {{> classroom}}
+      {{/each}}
+    </tbody>
+  </table>
+  </div>
+</template>
+
+<template name="classroom">
+  
+  <tr class="classroom {{selected}}">
+    <td><a href=/classrooms/{{classid}}>{{classname}}</a></td>
+    <td>{{owner}}</td>
+  </tr>
+
+</template>

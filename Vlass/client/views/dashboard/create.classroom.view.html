@@ -1,0 +1,28 @@
+<template name="createClassroom">
+  <div>
+    <form class="new-vlassroom">
+      <div>
+        <span>Enter your class name:</span>
+        <input type="text" name="Vlassroom-Name" placeholder="name" />
+      </div>
+      <div>
+        <span>Enter the class size: </span>
+        <input type="number" name="Vlassroom-Size" placeholder="size" />
+      </div>
+      <div>
+        <span>Enter the starting time: </span>
+        <input type="datetime-local" name="Vlassroom-Time" placeholder="What time will it start?"/>
+      </div>
+      <div>
+        <span>Enter the class duration: </span>
+        <input type="number" name="Vlassroom-Duration" placeholder="enter the duration" />
+      </div>
+      <div>
+        <span>Enter the description (optional)</span>
+        <input type="text" name="Vlassroom-Description" placeholder="brief description"/>
+      </div>
+      
+      <input type="submit" name="submit-Vlassroom" />
+    </form>
+  </div>
+</template>
