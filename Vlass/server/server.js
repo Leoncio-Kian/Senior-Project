@@ -25,11 +25,24 @@ process.on('SIGTERM', closeAndExit);
 process.on('SIGINT', closeAndExit);
 
 
-classes = new MysqlSubscription('allClasses');
+
+
 Meteor.publish('allClasses', function() {
   return liveDb.select(
     'SELECT * FROM classrooms',
     [ { table: 'classrooms' } ]
+  );
+});
+
+Meteor.publish('ownerClasses', function (userid) {
+  return liveDb.select(
+    'SELECT * FROM classrooms WHERE userid=' + liveDb.db.escape(userid),
+    [ {
+      table: 'classrooms',
+      condition: function(row, newRow, rowDeleted) {
+        return row.userid === userid || (newRow && newRow.userid === userid);
+      }
+    }]
   );
 });
 
@@ -42,7 +55,7 @@ Meteor.methods({
     liveDb.db.query('INSERT INTO classrooms (classname, description, userid, maxsize, duration, public) VALUES (?, ?, ?, ?, ?, ?)', [classname, description, userId, maxsize, duration, availability]);
   },
   'delete_classroom': function (classid) {
-    liveDb.db.query('UPDATE classrooms SET deleted=false WHERE classid = ?', [classid]);
+    liveDb.db.query('DELETE FROM classrooms WHERE classid = ?', [classid]);
   },
   'update_classroom': function (userId, classname, availability, duration, activeDate, maxsize, description) {
     //yeah lets just pretend we dont need this for now.

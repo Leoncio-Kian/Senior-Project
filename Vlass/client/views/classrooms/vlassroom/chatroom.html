@@ -1,0 +1,19 @@
+<template name="chatroom">
+    <div>
+        <ul id="vlassMessages">
+            {{# each messages}}
+                {{> message}}
+            {{/each}}
+
+        </ul>
+    </div>
+    <div>
+        <form class="vlassForm">
+            <input name="userMessage" /><input type="submit" name="submitMessage"/>
+        </form>
+    </div>
+</template>
+
+<template name="message">
+    <li>{{text}}</li>
+</template>

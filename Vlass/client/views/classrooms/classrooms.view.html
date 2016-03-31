@@ -18,7 +18,14 @@
 <template name="classroom">
   
   <tr class="classroom {{selected}}">
-    <td><a href=/classrooms/{{classid}}>{{classname}}</a></td>
+    <td>
+        {{#if currentUser}}
+        <a href=/classrooms/{{classid}}>{{classname}}</a>
+        {{else}}
+            <a href=/login>{{classname}}</a>
+        {{/if}}
+
+    </td>
     <td>{{owner}}</td>
   </tr>
 

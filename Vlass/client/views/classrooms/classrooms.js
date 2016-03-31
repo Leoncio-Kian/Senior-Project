@@ -1,9 +1,14 @@
-Template.classrooms.rendered = function () {
-  // classrooms = new MysqlSubscription('allclasses');
-};
+Template.classrooms.onCreated( function () {
+  classes = new MysqlSubscription('allClasses');
+});
 
 Template.classrooms.helpers({
   'classrooms': function () {
-    return classrooms.reactive();
+    console.log(classes);
+    return classes.reactive();
   }
 });
+
+Template.classrooms.onDestroyed( function () {
+  classes.stop();
+})

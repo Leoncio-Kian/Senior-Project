@@ -1,0 +1,27 @@
+<template name="editClassroom">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <th></th>
+            <th>Class Name</th>
+            <th></th>
+            </thead>
+            <tbody>
+            {{#each ownerClassrooms }}
+                {{> ownerClassroom}}
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
+
+
+<template name="ownerClassroom">
+
+    <tr class="ownerClassroom {{selected}}">
+
+        <td>{{classname}}</td>
+        <td><button type="button" id="deleteClass">Delete</button></td>
+    </tr>
+
+</template>

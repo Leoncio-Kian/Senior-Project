@@ -17,12 +17,6 @@ Template.createClassroom.events({
     var description = event.target.VlassroomDescription.value;
     var available = false;
     console.log( 'made it here!' );
-    Meteor.call('add_classroom', Meteor.userId(), classname, available, duration, time, size, description, function (error, response) {
-      if (error) 
-        console.log('there was an error!');
-      else {
-        console.log('something correctish happened!', response);
-      }
-    })
+    Meteor.call('add_classroom', Meteor.userId(), classname, available, duration, time, size, description);
   }
 })
