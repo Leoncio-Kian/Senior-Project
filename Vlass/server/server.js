@@ -60,5 +60,10 @@ Meteor.methods({
   'update_classroom': function (userId, classname, availability, duration, activeDate, maxsize, description) {
     //yeah lets just pretend we dont need this for now.
     //liveDb.db.query('UPDATE classrooms SET ')
+  },
+  'create_user': function (User){
+    console.log('made it to create user!', User);
+    
+    Accounts.createUser(User);
   }
 });
