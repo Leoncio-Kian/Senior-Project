@@ -1,3 +1,4 @@
+import '../page.css';
 import './dashboard.view.html';
 
 import './components/create/create.classroom.js';

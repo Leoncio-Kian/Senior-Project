@@ -1,17 +1,18 @@
 <template name="classrooms">
-  <h1>Classrooms</h1>
-  <div>
-  <table class="table table-striped">
-    <thead>
-      <th>Class Name</th>
-      <th>Owner</th>
-    </thead>
-    <tbody>
-      {{#each classrooms}}
-        {{> classroom}}
-      {{/each}}
-    </tbody>
-  </table>
+
+  <div class="Vlass-page">
+    <h1>Classrooms</h1>
+    <table class="table table-striped">
+      <thead>
+        <th>Class Name</th>
+        <th>Owner</th>
+      </thead>
+      <tbody>
+        {{#each classrooms}}
+          {{> classroom}}
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </template>
 

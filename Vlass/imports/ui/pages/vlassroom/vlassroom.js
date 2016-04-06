@@ -1,3 +1,5 @@
+import '../page.css';
+import './vlassroom.css';
 import './vlassroom.view.html';
 
 import './components/chatroom/chatroom.js';

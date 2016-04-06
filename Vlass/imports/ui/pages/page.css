@@ -1,0 +1,12 @@
+
+html, body {
+  height: 100%;
+}
+
+.Vlass-page {
+  margin: auto;
+  Width: 90%;
+  height: 100%;
+  background: whitesmoke;
+  padding-bottom: 100%;
+}

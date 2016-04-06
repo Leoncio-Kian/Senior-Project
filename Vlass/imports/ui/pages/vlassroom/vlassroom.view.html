@@ -1,10 +1,11 @@
 <template name="vlassroom">
-  <div>
-    <p>{{_id}}</p>
-    {{> whiteboard}}
-  </div>
-    <div>
+  <div class="Vlass-page">
+    <div class="css-whiteboard">
+      {{> whiteboard}}
+    </div>
+    <div class="css-chatroom">
         {{> chatroom}}
     </div>
+  </div>
 </template>
 

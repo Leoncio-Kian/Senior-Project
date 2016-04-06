@@ -1,0 +1,17 @@
+ul.vlassMessages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+li.vlassMessage {
+    padding-bottom: 3mm;
+    padding-top: 3mm;
+}
+.chat-user {
+    float: left;
+    font-weight: bold;
+}
+
+.chat-message {
+    float: right;
+}

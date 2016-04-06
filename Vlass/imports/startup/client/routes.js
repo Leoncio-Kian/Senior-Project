@@ -1,4 +1,6 @@
 import { Router, RouteController } from 'meteor/iron:router';
+
+import '../../ui/layouts/Index.css';
 import '../../ui/layouts/Index.html';
 
 import '../../ui/pages/landing/landing.js';
@@ -6,6 +8,7 @@ import '../../ui/pages/classrooms/classrooms.js';
 import '../../ui/pages/dashboard/dashboard.js';
 import '../../ui/pages/login/login.js';
 import '../../ui/pages/vlassroom/vlassroom.js';
+
 Router.configure({
   layoutTemplate: 'Vlass-Layout'
 });

@@ -1,13 +1,14 @@
 /**
  * Created by leonc on 4/2/2016.
  */
+import './login.css';
 import './login.view.html';
 
 //Template.login.onCreated();
 //Template.login.onRendered();
 //Template.login.helpers();
 Template.login.events({
-  "submit .login": function (event) {
+  "submit .login-form": function (event) {
     event.preventDefault();
 
     var email = event.target.Email.value;
@@ -21,7 +22,7 @@ Template.login.events({
 //Template.register.onRendered();
 //Template.register.helpers();
 Template.register.events({
-  "submit .newUser": function (event) {
+  "submit .register-form": function (event) {
     event.preventDefault();
     var username = event.target.Username.value;
     var password = event.target.Password.value;

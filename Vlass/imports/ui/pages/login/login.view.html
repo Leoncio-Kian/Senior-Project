@@ -1,57 +1,63 @@
 <template name="login">
-  <p>this is the login page!</p>
-  {{> loginButtons}}
-    <div>
-        <form class="login">
+    <div class="container">
+        <form class="form-signin login-form">
+            <h2 class="form-signin-heading">Sign in to Vlass</h2>
             <div>
-                <input type="text" name="Email" placeholder="Email" />
+                <input type="email" class="form-control" name="Email" placeholder="Email address" />
             </div>
             <div>
-                <input type="password" name="Password" placeholder="Password" />
+                <input type="password" class="form-control" name="Password" placeholder="Password" />
             </div>
-            <div>
-                <input type="submit" name="Submit" />
+            <div class="spacing">
+                <input type="submit" name="Sign in" class="btn btn-lg btn-primary btn-block" value="Sign in"/>
             </div>
         </form>
+        <div>
+          <p>Not registered? <a href="/register">Create an account</a></p>
+        </div>
     </div>
 
-  <a href="/register">Registration Page</a>
+
 </template>
 
 <template name="register">
-  <p>this is the registration page!</p>
-  <form class="newUser">
-      <div>
-          <input type="text" name="Username" placeholder="Username" />
-      </div>
-      <div>
-          <input type="password" name="Password" placeholder="Password" />
-      </div>
-      <div>
-          <input type="text" name="FirstName" placeholder="First name" />
-      </div>
-      <div>
-          <input type="text" name="LastName" placeholder="Last name" />
-      </div>
-      <div>
-          <input type="text" name="Email" placeholder="Email" />
-      </div>
-      <div>
-          <input type="date" name="Birthday"/>
-      </div>
-      <div>
-          <select name="Gender" >
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-          </select>
-      </div>
-      <div>
-          <input type="text" name="Country" placeholder="Country of origin" />
-      </div>
-      <div>
-          <input type="submit" name="submitUser"/>
-      </div>
-  </form>
-  <a href="/login">Login Page</a>
+  <div class="container">
+    <form class="form-signin register-form">
+      <h2 class="form-signin-heading">Register for Vlass</h2>
+        <div>
+            <input type="text" class="form-control" name="Username" placeholder="Username" />
+        </div>
+        <div>
+            <input type="password" class="form-control" name="Password" placeholder="Password" />
+        </div>
+        <div>
+            <input type="text" class="form-control" name="FirstName" placeholder="First name" />
+        </div>
+        <div>
+            <input type="text" class="form-control" name="LastName" placeholder="Last name" />
+        </div>
+        <div>
+            <input type="text" class="form-control" name="Email" placeholder="Email address" />
+        </div>
+        <div>
+            <input type="date" class="form-control" name="Birthday"/>
+        </div>
+        <div>
+            <select name="Gender" class="form-control">
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+        </div>
+        <div>
+            <input type="text" class="form-control" name="Country" placeholder="Country of origin" />
+        </div>
+        <div class="spacing">
+            <input type="submit" name="submitUser" class="btn btn-lg btn-primary btn-block" value="Register"/>
+        </div>
+    </form>
+    <div>
+      <p>Already have an account? <a href="/login">Sign in</a></p>
+    </div>
+  </div>
 </template>
 

@@ -2,6 +2,7 @@
  * Created by leonc on 3/31/2016.
  */
 //Template.chatroom.onCreated();
+import './chatroom.css';
 import './chatroom.view.html';
 import {Messages } from '../../../../../api/messages/messages.js';
 Template.chatroom.onCreated( function () {

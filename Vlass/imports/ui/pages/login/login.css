@@ -1,0 +1,17 @@
+.container {
+  width: 350px;
+  height: 50%;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 25px;
+  background: whitesmoke;
+}
+
+.form-signin-heading {
+  font-size: 30px;
+  text-align: center;
+}
+.spacing {
+  padding-top: 2mm;
+  padding-bottom: 5mm;
+}

@@ -103,6 +103,7 @@ Template.whiteboard.onRendered(function () {
   });
 });
 */
+import './whiteboard.css';
 import './whiteboard.view.html';
 
 function Whiteboard(outerclassid, outercanvas) {

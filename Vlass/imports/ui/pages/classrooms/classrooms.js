@@ -1,3 +1,4 @@
+import './classrooms.css';
 import './classrooms.view.html';
 
 Template.classrooms.onCreated( function () {
