@@ -1,10 +1,16 @@
 .css-whiteboard {
-    float: left;
-    width: 60%;
-    padding-top: 5mm;
-    padding-left: 2mm;
+  float: left;
+  margin: auto;
+  width: 60%;
+  height: 100%;
+  padding-top: 5mm;
+  padding-left: 5mm;
 }
 .css-chatroom {
-    float: right;
-    width: 30%;
+  float: right;
+  margin: auto;
+  width: 25%;
+  height: 100%;
+  padding-top: 7mm;
+  padding-right: 10mm;
 }

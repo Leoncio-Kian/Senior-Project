@@ -1,10 +1,18 @@
 <template name="vlassroom">
   <div class="Vlass-page">
+
+    <div>
+      <h2>{{currentclassname}}</h2>
+      <h4>{{classdescription}}</h4>
+    </div>
     <div class="css-whiteboard">
       {{> whiteboard}}
     </div>
     <div class="css-chatroom">
         {{> chatroom}}
+    </div>
+    <div class="css-audio">
+
     </div>
   </div>
 </template>

@@ -6,19 +6,12 @@ Streamy.onConnect(function (socket) {
 });
 
 
-Streamy.on('whiteboard_update', function (msg, socket) {
-  console.log('server whiteboard updated!');
-  // Streamy.broadcast('whiteboard update client',msg, socket);
-  whiteboardArray.push(msg);
-
-});
-
-Streamy.on('get_Whiteboard', function (data, socket) {
-  console.log(data);
-  // console.log(socket);
-  if (whiteboardArray != null)
-    Streamy.emit('initialize_Whiteboard', { data: whiteboardArray }, socket);
-});
+// Streamy.on('whiteboard_update', function (msg, socket) {
+//   console.log('server whiteboard updated!');
+//   // Streamy.broadcast('whiteboard update client',msg, socket);
+//   whiteboardArray.push(msg);
+//
+// });
 
 Meteor.methods({
   'get_whiteboard': function (classid) {
@@ -38,23 +31,28 @@ Meteor.methods({
 
 
   },
-  'set_whiteboard': function (classid, canvas) {
+  'set_whiteboard': function (classid, plotArray) {
 
     console.log(classid);
     if (!classid) {
       console.log('the classid doesn\'t exist!');
     }
-    else if (!canvas) {
-      console.log(canvas);
-      console.log('the canvas doesn\'t exist!');
+    else if (!plotArray) {
+      console.log(plotArray);
+      console.log('the array doesn\'t exist!');
 
     } else if (!whiteboardArray[classid]) {
       console.log('creating first entry in whiteboard array');
-      whiteboardArray[classid] = [canvas];
+      whiteboardArray[classid] = [];
+      whiteboardArray[classid].push(plotArray);
     }
     else {
-      whiteboardArray[classid].push(canvas);
+      whiteboardArray[classid].push(plotArray);
       // console.log(whiteboardArray[classid]);
     }
+  },
+  'clear_whiteboard': function (classid) {
+    whiteboardArray[classid] = [];
+    console.log('whiteboard has been cleared!');
   }
 })

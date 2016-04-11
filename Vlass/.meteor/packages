@@ -16,7 +16,6 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 
-insecure                # Allow all DB writes from clients (for prototyping)
 iron:router
 numtel:mysql
 accounts-ui
@@ -32,3 +31,5 @@ practicalmeteor:mocha
 xolvio:cleaner
 aldeed:simple-schema
 aldeed:collection2
+http
+matb33:collection-hooks

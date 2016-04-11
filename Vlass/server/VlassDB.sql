@@ -21,20 +21,26 @@ INSERT INTO `classroom` (`classname`, `owner`, `currentsize`, `maxsize`, `public
 */
 
 USE `VlassDB`;
-
+drop table `classrooms`;
 CREATE TABLE `classrooms` (
   `classid` int NOT NULL AUTO_INCREMENT,
   `classname` varchar(45) NOT NULL UNIQUE,
   `description` varchar(300),
-  `userid` varchar(45) DEFAULT NULL,
+  `userid` varchar(24) DEFAULT NULL,
   `currentsize` int(10) DEFAULT 0,
   `maxsize` int(10) DEFAULT 30,
   `activeDate` datetime default current_timestamp,
   `duration` int(10) DEFAULT 2,
   `public` boolean DEFAULT TRUE,
   `deleted` boolean default false,
-  PRIMARY KEY (`classid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`classid`),
+  CONSTRAINT c_users
+	FOREIGN KEY (userid)
+    REFERENCES users(userid)
+    ON DELETE CASCADE
+) ENGINE=InnoDB;
 
-INSERT INTO `classrooms` (`classname`, `description`, `userid`, `maxsize`, `public`, `duration`) VALUES
-  ('classOne', 'the first class ever made!', 'leon', '30', false, '3'),('victors class', 'dawg pls', 'victor', '45', true, '2'),('Music theory', 'an introduction to the romantic period','chopin', '43', true, '4');
+
+
+#INSERT INTO `classrooms` (`classname`, `description`, `userid`, `maxsize`, `public`, `duration`) VALUES
+#  ('classOne', 'the first class ever made!', 'leon', '30', false, '3'),('victors class', 'dawg pls', 'victor', '45', true, '2'),('Music theory', 'an introduction to the romantic period','chopin', '43', true, '4');

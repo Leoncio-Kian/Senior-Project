@@ -1,15 +1,15 @@
 // Override Meteor._debug to filter for custom msgs
 import '../imports/api/users/users.js';
+import '../imports/api/users/server/publications.js';
 
-import { liveDb } from '../imports/api/classrooms/classrooms.js';
 
-import '../imports/api/classrooms/methods.js';
+
+import '../imports/startup/server/index.js';
 
 import '../imports/api/classrooms/server/publications.js';
+import '../imports/api/classrooms/methods.js';
 
 import '../imports/api/messages/messages.js';
-
-//import '../imports/api/classrooms/methods.js';
 
 import '../imports/api/messages/server/publications.js';
 

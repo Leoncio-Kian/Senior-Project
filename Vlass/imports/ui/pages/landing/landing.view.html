@@ -5,8 +5,12 @@
         <h6 class="subtitle">The future of learning!</h6>
       </div>
       <div class="login-buttons">
+        {{#if currentUser }}
+          <span><a href="/classrooms" class="btn btn-primary">View classrooms</a></span>
+        {{else}}
         <span><a href="/register" class="btn btn-primary login">Registration Page</a></span>
         <span><a href="/login" class="btn btn-primary register">Login Page</a></span>
+        {{/if}}
       </div>
     </div>
 </template>

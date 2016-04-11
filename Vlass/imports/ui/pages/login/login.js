@@ -45,8 +45,13 @@ Template.register.events({
       },
       password: password
     };
-    Accounts.createUser(newUser, function (error, response) {
-      console.log('error', error, 'response', response);
+    Accounts.createUser(newUser, function (error) {
+      if(error) {
+        console.log('error', error);
+      }
+      else{
+        Route.go('/');
+      }
     });
     console.log('Form submitted');
   }

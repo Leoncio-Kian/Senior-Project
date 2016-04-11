@@ -19,4 +19,12 @@ body {
   width: 100%;
   padding: 0;
 }
+.vlass-menu {
+  float: left;
+}
 
+
+.user-menu {
+  float: right;
+  padding-right: 5mm;
+}

@@ -19,8 +19,13 @@ vlassroomController = RouteController.extend({
     return { _id: this.params._id };
   },
   action: function () {
-    console.log('im about to render vlassroom!');
-    this.render('vlassroom', { to: 'aside' });
+    if(!Meteor.userId()) {
+      this.redirect('/login');
+    }
+    else {
+      console.log('im about to render vlassroom!');
+      this.render('vlassroom', {to: 'aside'});
+    }
   }
 });
 
@@ -39,11 +44,21 @@ Router.route('/', function () {
   this.render('landing', { name: 'home', to: 'aside' });
 });
 Router.route('/login', function () {
-  this.render('login', { to: 'aside' });
-});
+  if (Meteor.userId()){
+    this.redirect('/');
+  }
+  else {
+    this.render('login', {to: 'aside'});
+  }
+  });
 Router.route('/register', function () {
-  this.render('register', { to: 'aside' });
-});
+  if (Meteor.userId()){
+    this.redirect('/');
+  }
+  else {
+    this.render('register', {to: 'aside'});
+  }
+  });
 /*
 Router.route('/whiteboard', function () {
   this.render('whiteboard', {to: 'aside'});
@@ -60,9 +75,25 @@ Router.route('/classrooms/:_id', {
 });
 
 Router.route('/dashboard', function () {
-  this.render('dashboard', { to: 'aside' });
+  if(!Meteor.userId()){
+    this.redirect('/login');
+  }
+  else {
+    this.render('dashboard', {to: 'aside'});
+  }
 });
 
 Router.route('/landing', function () {
   this.redirect('/');
 });
+
+Router.route('/logout', function () {
+  if (Meteor.userId()){
+    Meteor.logout(function (error) {
+      console.log(error);
+    });
+  }
+
+
+  this.redirect('/');
+})

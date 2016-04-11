@@ -5,6 +5,7 @@
     <table class="table table-striped">
       <thead>
         <th>Class Name</th>
+        <th>Occupancy</th>
         <th>Owner</th>
       </thead>
       <tbody>
@@ -21,13 +22,14 @@
   <tr class="classroom {{selected}}">
     <td>
         {{#if currentUser}}
-        <a href=/classrooms/{{classid}}>{{classname}}</a>
+          <a href=/classrooms/{{classid}}>{{classname}}</a>
         {{else}}
-            <a href=/login>{{classname}}</a>
+          <a href=/login>{{classname}}</a>
         {{/if}}
 
     </td>
-    <td>{{owner}}</td>
+    <td>{{currentsize}}/{{maxsize}}</td>
+    <td>{{username}}</td>
   </tr>
 
 </template>

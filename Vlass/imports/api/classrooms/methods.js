@@ -1,7 +1,10 @@
 /**
  * Created by leonc on 4/3/2016.
  */
-import { liveDb } from './classrooms.js';
+import { liveDb } from '../../startup/server/index.js';
+var removeUser = function (userid) {
+
+}
 
 Meteor.methods({
   'add_classroom': function (userId, classname, availability, duration, activeDate, maxsize, description) {
@@ -17,5 +20,13 @@ Meteor.methods({
   'update_classroom': function (userId, classname, availability, duration, activeDate, maxsize, description) {
     //yeah lets just pretend we dont need this for now.
     //liveDb.db.query('UPDATE classrooms SET ')
+  },
+  'add_user_to_classroom': function (userid, classid) {
+    liveDb.db.query('INSERT INTO usersinclasses (userid, classid) VALUES (?, ?)', [userid, classid]);
+  },
+  'remove_user_from_classroom': function (userid) {
+    //the method will remove even repeats from it. ideally I get to stop users from going into two classes at once.
+    liveDb.db.query('DELETE FROM usersinclasses WHERE userid=?', [userid]);
   }
+
 });
