@@ -26,7 +26,7 @@ CREATE TABLE `classrooms` (
   `classid` int NOT NULL AUTO_INCREMENT,
   `classname` varchar(45) NOT NULL UNIQUE,
   `description` varchar(300),
-  `userid` varchar(24) DEFAULT NULL,
+  `userid` char(24) NOT NULL,
   `currentsize` int(10) DEFAULT 0,
   `maxsize` int(10) DEFAULT 30,
   `activeDate` datetime default current_timestamp,
@@ -34,11 +34,8 @@ CREATE TABLE `classrooms` (
   `public` boolean DEFAULT TRUE,
   `deleted` boolean default false,
   PRIMARY KEY (`classid`),
-  CONSTRAINT c_users
-	FOREIGN KEY (userid)
-    REFERENCES users(userid)
-    ON DELETE CASCADE
-) ENGINE=InnoDB;
+  FOREIGN KEY (userid) REFERENCES users (userid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
