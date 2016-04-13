@@ -69,6 +69,7 @@ modules@0.5.2
 modules-runtime@0.6.2
 mongo@1.1.6
 mongo-id@1.0.3
+mrt:rtcmulticonnection@0.0.4
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.42
 numtel:mysql@1.0.5

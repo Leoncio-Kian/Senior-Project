@@ -28,8 +28,8 @@ Template.audio.onCreated(function () {
     incomingCall.answer(window.localStream);
     incomingCall.on('stream', function (remoteStream) {
       window.remoteStream = remoteStream;
-      var video = document.getElementById("theirVideo")
-      video.src = URL.createObjectURL(remoteStream);
+      var audio = document.getElementById("theirAudio")
+      audio.src = URL.createObjectURL(remoteStream);
     });
   });
   navigator.getUserMedia = ( navigator.getUserMedia ||
@@ -38,16 +38,16 @@ Template.audio.onCreated(function () {
   navigator.msGetUserMedia );
 
   // get audio/video
-  /*
+
   navigator.getUserMedia({audio:true, video: false}, function (stream) {
       //display video
-      var video = document.getElementById("myVideo");
-      video.src = URL.createObjectURL(stream);
+      var audio = document.getElementById("myAudio");
+      audio.src = URL.createObjectURL(stream);
       window.localStream = stream;
     },
     function (error) { console.log(error); }
   );
-  */
+
 });
 
 Template.audio.events({
@@ -56,8 +56,8 @@ Template.audio.events({
     window.currentCall = outgoingCall;
     outgoingCall.on('stream', function (remoteStream) {
       window.remoteStream = remoteStream;
-      var video = document.getElementById("theirVideo")
-      video.src = URL.createObjectURL(remoteStream);
+      var audio = document.getElementById("theirAudio")
+      audio.src = URL.createObjectURL(remoteStream);
     });
   },
 

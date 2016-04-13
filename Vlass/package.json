@@ -1,0 +1,31 @@
+{
+  "name": "vlass",
+  "version": "1.0.0",
+  "description": "A virtual classroom web application",
+  "main": "index.js",
+  "dependencies": {
+    "bufferutil": "^1.2.1",
+    "easyrtc": "^1.0.15",
+    "events": "^1.1.0",
+    "meteor-node-stubs": "^0.2.3",
+    "utf-8-validate": "^1.2.1"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^4.2.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "meteor"
+    ],
+    "extends": [
+      "airbnb/base",
+      "plugin:meteor/guide"
+    ],
+    "rules": {}
+  },
+  "author": "",
+  "license": "ISC"
+}
