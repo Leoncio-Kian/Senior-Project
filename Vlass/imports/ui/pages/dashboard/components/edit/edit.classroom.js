@@ -12,11 +12,9 @@ Template.editClassroom.helpers({
   }
 });
 Template.editClassroom.events({
-
-
   'click #deleteClass': function () {
     console.log(this.classid);
-console.log(ownerClasses);
+    console.log(ownerClasses);
     Meteor.call('delete_classroom', this.classid);
     ownerClasses.changed();
   }

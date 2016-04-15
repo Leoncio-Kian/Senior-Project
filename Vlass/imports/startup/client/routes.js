@@ -59,11 +59,6 @@ Router.route('/register', function () {
     this.render('register', {to: 'aside'});
   }
   });
-/*
-Router.route('/whiteboard', function () {
-  this.render('whiteboard', {to: 'aside'});
-});
-*/
 Router.route('/classrooms', function () {
   this.render('classrooms', { to: 'aside' });
 });

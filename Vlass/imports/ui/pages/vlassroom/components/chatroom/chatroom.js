@@ -14,7 +14,7 @@ Template.chatroom.onRendered(function () {
   console.log('in chatroom and id is =', Session.get("classid"))
 
   if(Session.get("classid") !== null) {
-    Streamy.join('chatroom ' + Session.get("classid"));
+    //Streamy.join('chatroom ' + Session.get("classid"));
   } else {
     console.log("something went very very wrong");
   }

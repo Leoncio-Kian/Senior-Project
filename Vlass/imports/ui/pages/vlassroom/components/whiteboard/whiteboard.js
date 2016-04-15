@@ -41,9 +41,9 @@ var whiteboardRoom;
 
 
 Template.whiteboard.onCreated(function () {
-  Session.set("classid", this.data._id);
+  //Session.set("classid", this.data._id);
   whiteboardRoom = "whiteboard " + this.data._id;
-  console.log(whiteboardRoom);
+  console.log(Session.get("socketid"));
 })
 
 
@@ -67,7 +67,7 @@ Template.whiteboard.onRendered(function () {
   });
 
   // console.log(cWhiteboard.getClassid() + 'something');
-  Streamy.join(whiteboardRoom);
+  //Streamy.join(whiteboardRoom);
   console.log(whiteboardRoom);
   //
   // console.log(cWhiteboard.getClassid());
@@ -95,7 +95,7 @@ Template.whiteboard.onRendered(function () {
 
 Window.emitUpdate = function (currentColor, currentLineWidth, plots) {
   console.log('inside window emit!');
-  Streamy.rooms(whiteboardRoom).emit('whiteboard_update', {
+  Streamy.rooms(Session.get("socketid")).emit('whiteboard_update', {
     'color': currentColor,
     'linewidth': currentLineWidth,
     'plots': plots
@@ -127,7 +127,7 @@ Template.whiteboard.events({
   'click #clear_button': function () {
     console.log('clear button clicked.');
     cWhiteboard.clearWhiteboard(true);
-    Streamy.rooms(whiteboardRoom).emit('whiteboard_clear', {'clear': true });
+    Streamy.rooms(Session.get("socketid")).emit('whiteboard_clear', {'clear': true });
     Meteor.call('clear_whiteboard', Session.get("classid"));
   },
   'click #erase_button': function () {
@@ -159,7 +159,7 @@ Streamy.on('whiteboard_clear', function (msg) {
 
 });
 Template.whiteboard.onDestroyed(function () {
-  Streamy.leave(whiteboardRoom);
+  //Streamy.leave(Session.get("socketid"));
 });
 
 

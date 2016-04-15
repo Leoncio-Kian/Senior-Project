@@ -7,8 +7,8 @@ import { liveDb } from '../../../startup/server/index.js';
 
 Meteor.publish('allClasses', function() {
   return liveDb.select(
-    'SELECT * FROM classroomuserinfo',
-    [ { view: 'classroomuserinfo' } ]
+    'SELECT * FROM classroomUserInfo',
+    [ { view: 'classroomUserInfo' } ]
   );
 });
 

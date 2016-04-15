@@ -18,19 +18,16 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 iron:router
 numtel:mysql
-accounts-ui
 accounts-password
 
-joncursi:socket-io-client
 yuukan:streamy
 yuukan:streamy-rooms
 twbs:bootstrap
 standard-minifier-css
 standard-minifier-js
-practicalmeteor:mocha
 xolvio:cleaner
 aldeed:simple-schema
 aldeed:collection2
 http
 matb33:collection-hooks
-mrt:rtcmulticonnection
+numtel:mysql-server

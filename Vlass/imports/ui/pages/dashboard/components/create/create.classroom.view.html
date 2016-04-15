@@ -21,8 +21,23 @@
         <span>Enter the description (optional)</span>
         <input type="text" name="VlassroomDescription" placeholder="brief description"/>
       </div>
-      
-      <input type="submit" name="submitVlassroom" />
+      <div>
+        <input type="radio" name="audioType" value="MESH"> Multiperson<br>
+        <input type="radio" name="audioType" value="BROADCAST"> Broadcast<br>
+      </div>
+      <div>
+        <input type="radio" name="isPublic" value="true"> public<br>
+        <input type="radio" name="isPublic" value="false"> Private<br>
+      </div>
+      <div>
+        <input type="radio" name="instructorOnly" value="true"> One Instructor<br>
+        <input type="radio" name="instructorOnly" value="false"> All Instructor<br>
+      </div>
+      <div>
+        <input type="radio" name="chatroomEnabled" value="true"> Have Chatroom<br>
+        <input type="radio" name="chatroomEnabled" value="false"> No Chatroom<br>
+      </div>
+        <input type="submit" name="submitVlassroom" />
     </form>
   </div>
 </template>

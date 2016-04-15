@@ -1,43 +1,55 @@
-/*CREATE DATABASE `VlassDB`;
-USE `VlassDB`;
 
-CREATE TABLE `classroom` (
-  `classid` varchar(16) NOT NULL UNIQUE,
-  `classname` varchar(45) NOT NULL UNIQUE,
-  `owner` varchar(24) DEFAULT NULL,
-  `currentsize` int(10) DEFAULT 0,
-  `maxsize` int(10) DEFAULT 30,
-  `public` boolean DEFAULT TRUE,
-  PRIMARY KEY (`classid`)
+
+CREATE DATABASE `vlassdb`;
+USE `vlassdb`;
+
+#Use VlassDB;
+#drop table `users`;
+CREATE TABLE `users` (
+  `userid` char(24) NOT NULL UNIQUE,
+  `username` varchar (24) NOT NULL,
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
-CREATE TRIGGER before_insert_classroom
-  BEFORE INSERT ON `classroom`
-  FOR EACH ROW
-  SET new.classid = uuid();
-
-INSERT INTO `classroom` (`classname`, `owner`, `currentsize`, `maxsize`, `public`) VALUES 
-  ('classOne', 'leon', '0', '30', false),('victors class', 'victor', '0', '45', true),('Music theory', 'chopin', '2', '43', true);
-*/
-
-USE `VlassDB`;
-drop table `classrooms`;
+#drop table `classrooms`;
 CREATE TABLE `classrooms` (
   `classid` int NOT NULL AUTO_INCREMENT,
   `classname` varchar(45) NOT NULL UNIQUE,
   `description` varchar(300),
   `userid` char(24) NOT NULL,
-  `currentsize` int(10) DEFAULT 0,
   `maxsize` int(10) DEFAULT 30,
   `activeDate` datetime default current_timestamp,
   `duration` int(10) DEFAULT 2,
-  `public` boolean DEFAULT TRUE,
-  `deleted` boolean default false,
+  `isPublic` boolean DEFAULT TRUE,
+  `audio` char(10) DEFAULT "MESH",
+  `chatroomEnabled` boolean DEFAULT TRUE,
+  `instructorOnly` boolean DEFAULT TRUE,
   PRIMARY KEY (`classid`),
-  FOREIGN KEY (userid) REFERENCES users (userid) ON DELETE CASCADE
+  FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `usersInClasses` (
+  `userid` char(24) NOT NULL,
+  `classid` int NOT NULL,
+  PRIMARY KEY (`userid`, `classid`),
+FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE,
+FOREIGN KEY (`classid`) REFERENCES `classrooms` (`classid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 
-#INSERT INTO `classrooms` (`classname`, `description`, `userid`, `maxsize`, `public`, `duration`) VALUES
-#  ('classOne', 'the first class ever made!', 'leon', '30', false, '3'),('victors class', 'dawg pls', 'victor', '45', true, '2'),('Music theory', 'an introduction to the romantic period','chopin', '43', true, '4');
+CREATE VIEW classroomCount AS
+  SELECT `classid`, COUNT(usersInClasses.userid) AS `classcount` FROM `usersInClasses`;
+
+  CREATE VIEW classroomUserInfo AS
+  SELECT classrooms.classid, classrooms.classname, users.username, classrooms.maxsize, IFNULL(classroomCount.classcount, 0) AS currentsize
+    FROM `classrooms` JOIN `users` LEFT JOIN classroomCount
+    ON classrooms.classid=classroomCount.classid
+    WHERE classrooms.userid=users.userid AND classrooms.isPublic=true;
+
+/*
+CREATE VIEW classroomUserInfo AS
+  SELECT classrooms.classid, classrooms.classname, users.username, classrooms.maxsize, IFNULL(cs.classcount, 0) AS currentsize
+    FROM `classrooms` JOIN `users` LEFT JOIN (SELECT `classid`, COUNT(usersinclasses.userid) AS `classcount` FROM `usersinclasses`) AS `cs`
+    ON classrooms.classid=cs.classid
+    WHERE classrooms.userid=users.userid AND classrooms.isPublic=true;
+    */

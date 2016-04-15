@@ -5,14 +5,6 @@ Streamy.onConnect(function (socket) {
 
 });
 
-
-// Streamy.on('whiteboard_update', function (msg, socket) {
-//   console.log('server whiteboard updated!');
-//   // Streamy.broadcast('whiteboard update client',msg, socket);
-//   whiteboardArray.push(msg);
-//
-// });
-
 Meteor.methods({
   'get_whiteboard': function (classid) {
     if (!classid) {
@@ -55,4 +47,4 @@ Meteor.methods({
     whiteboardArray[classid] = [];
     console.log('whiteboard has been cleared!');
   }
-})
+});

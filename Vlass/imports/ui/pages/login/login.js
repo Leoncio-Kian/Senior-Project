@@ -4,9 +4,7 @@
 import './login.css';
 import './login.view.html';
 
-//Template.login.onCreated();
-//Template.login.onRendered();
-//Template.login.helpers();
+
 Template.login.events({
   "submit .login-form": function (event) {
     event.preventDefault();
@@ -18,9 +16,6 @@ Template.login.events({
   }
 });
 
-//Template.register.onCreated();
-//Template.register.onRendered();
-//Template.register.helpers();
 Template.register.events({
   "submit .register-form": function (event) {
     event.preventDefault();
